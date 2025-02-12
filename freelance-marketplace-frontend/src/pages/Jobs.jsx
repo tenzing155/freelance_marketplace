@@ -1,9 +1,19 @@
-import JobList from "../components/JobList";
+import React from "react";
+import "./Jobs.css";
 
-const Jobs = () => {
+const Jobs = ({ jobs }) => {
   return (
-    <div className="container mx-auto p-4">
-      <JobList />
+    <div className="jobs-container">
+      <h1 className="jobs-title">Available Jobs</h1>
+      <div className="jobs-list">
+        {jobs.map((job) => (
+          <div key={job.id} className="job-item">
+            <h3>{job.title}</h3>
+            <p>{job.description}</p>
+            <p className="job-budget">Budget: ${job.budget}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,53 @@
+/* Jobs Page Styling */
+.jobs-container {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .jobs-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+  }
+  
+  .job-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .job-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .job-item h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .job-item p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .job-item .job-budget {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1cc88a;
+    margin-top: 10px;
+  }
+  

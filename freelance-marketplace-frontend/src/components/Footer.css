@@ -1,0 +1,33 @@
+/* Footer Styling */
+.footer {
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark text color */
+    padding: 15px 30px; /* Padding for spacing */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1rem;
+    box-shadow: -2px -2px 6px rgba(0, 0, 0, 0.1); /* Small shadow to make it stand out */
+  }
+  
+  .footer p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer a {
+    color: #1cc88a; /* Green link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
