@@ -1,8 +1,16 @@
 from rest_framework import serializers
-from .models import Job
+from .models import Job, Bid
 
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
-        fields = ['id', 'title', 'description', 'budget', 'posted_by']  # Ensure 'posted_by' is listed
-        extra_kwargs = {'posted_by': {'read_only': True}}  # ✅ This makes 'posted_by' automatic
+        fields = '__all__'
+        read_only_fields = ['client']
+
+class BidSerializer(serializers.ModelSerializer):
+    freelancer = serializers.ReadOnlyField(source='freelancer.username')
+
+    class Meta:
+        model = Bid
+        fields = '__all__'
+        read_only_fields = ['freelancer', 'job']

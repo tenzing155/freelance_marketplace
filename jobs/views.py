@@ -1,7 +1,7 @@
-from rest_framework import generics, permissions 
-from .models import Job
-from .serializers import JobSerializer
-import stripe 
+from rest_framework import generics, permissions
+from .models import Job, Bid
+from .serializers import JobSerializer, BidSerializer
+import stripe
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -13,12 +13,24 @@ class JobListCreateView(generics.ListCreateAPIView):
     permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
-        serializer.save(posted_by=self.request.user)  # ✅ Automatically sets 'posted_by'
+        serializer.save(client=self.request.user)  # ✅ Fixed: Automatically sets 'client'
 
 class JobDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
     permission_classes = [permissions.IsAuthenticated]  # <- Requires login
+
+class BidListCreateView(generics.ListCreateAPIView):
+    serializer_class = BidSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        job_id = self.kwargs['job_id']
+        return Bid.objects.filter(job_id=job_id)  # Get all bids for a specific job
+
+    def perform_create(self, serializer):
+        job = Job.objects.get(pk=self.kwargs['job_id'])
+        serializer.save(freelancer=self.request.user, job=job)
 
 @csrf_exempt
 def create_checkout_session(request):
@@ -44,4 +56,3 @@ def create_checkout_session(request):
         return JsonResponse({'checkout_url': session.url})  # ✅ Return the correct URL
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=400)
-
